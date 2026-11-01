@@ -43,6 +43,17 @@ users and can't learn from anyone else's behavior. It first prioritizes matching
 - How do you choose which songs to recommend
   - The ranking rule scores every song in the catalog, sorts them from highest to lowest score, and returns the top 5.
 
+Algorithm Recipe:
+1. The system takes in the user's taste profile, including favorite genre, favorite mood, target energy, target acousticness, target valence.
+2. Each song is compared against the user's prefernces. For each feature a match score is calculated: `1 - |song - target|` for energy, acousticness and valence, and 1 or 0 for mood and genre.
+3. Each match score is multiplied by its assigned weight (listed above) and they are all added up to get the song's score.
+4. The songs are sorted from highest to lowest score and the top 5 recommendations are returned.
+
+Expected biases:
+- The system mainly recommends songs similar to the stated profile, so it may not introduce much new music which the user could like.
+- This system might over-prioritize mood and genre, which together are worth 0.45. This could cause songs with near-perfect energy match but different mood or genre label to be ranked lower.
+- The system only gives points when a song's genre or mood exactly matches the user's preferences. Similar labels, such as "chill" and "relaxed," receive no points even though they have similar meanings.
+
 ---
 
 ## Getting Started
