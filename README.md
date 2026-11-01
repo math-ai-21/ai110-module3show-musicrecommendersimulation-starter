@@ -16,18 +16,32 @@ Replace this paragraph with your own summary of what your version does.
 ---
 
 ## How The System Works
-
-Explain your design in plain language.
-
-Some prompts to answer:
+- Real-world recommenders like Spotify or YouTube mostly use two approaches. Collaborative filtering looks at what similar users listened to, skipped, or saved. Content-based filtering compares the specific attributes (such as genre, artist, etc) of the songs themselves to what a user already likes. The version I am building is content-based only, as it has no other
+users and can't learn from anyone else's behavior. It first prioritizes matching a song's energy first, then mood, then genre, because I believe those best show how people feel about the song. The tradeoff here is that such a system will mostly recommend songs that look like what the user already asked for, so it won't give them new types of songs in a way a real system may have.
 
 - What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
+  - Each song in my system uses energy, mood, genre, acousticness and valence. The variables id, title, and artist are just identifiers, not characteristics of a song. I left out tempo_bpm and danceability as they mostly repeat what energy already shows. 
 - What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+  - UserProfile stores the user's favorite genre, favorite mood, target energy, target acousticness and target valence.
 
-You can include a simple diagram or bullet list if helpful.
+- How does your `Recommender` compute a score for each song
+  - My recommender gives each song a score from 0 to 1 based on how well the song fits the user's profile. For every feature, it compares the song's value to the user's preference and works out a match score (1 = perfect match, 0 = no match). It multiplies each match score by that feature's weight and adds the results.
+
+- How each match score is calculated:
+  - Energy, acousticness, and valence use a linear closeness score: `1 - |song - target|`. The target is the value stored in the user's profile, so the closer a song's value is to what the user wants, the higher it scores. For example, if the user's target energy is 0.80, a song with energy 0.82 scores 0.98 and a song with energy 0.42 scores 0.62.
+  - Mood and genre use an exact match where the score is 1 if the song's value is the same as the user's favorite, otherwise it is 0.
+
+  The weights are:
+  - energy: 0.30
+  - mood: 0.25
+  - genre: 0.20
+  - acousticness: 0.15
+  - valence: 0.10
+
+  These weights are my own judgment, and not from the data. I chose energy to be the highest because it separates calm songs from intense ones best and also reflects tempo and danceability. Mood is second because it decides whether a song fits the moment. Genre is lower because most genres appear only once in the catalog. Acousticness adds a little beyond energy, and valence is lowest because it varies the least.
+
+- How do you choose which songs to recommend
+  - The ranking rule scores every song in the catalog, sorts them from highest to lowest score, and returns the top 5.
 
 ---
 
