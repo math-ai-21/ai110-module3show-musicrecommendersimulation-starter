@@ -21,17 +21,8 @@ Prompts:
 
 ## 3. How the Model Works  
 
-Explain your scoring approach in simple language.  
-
-Prompts:  
-
-- What features of each song are used (genre, energy, mood, etc.)  
-- What user preferences are considered  
-- How does the model turn those into a score  
-- What changes did you make from the starter logic  
-
-Avoid code here. Pretend you are explaining the idea to a friend who does not program.
-
+My recommender gives each song a score based on how well it matches with the user's profile. The score goes from 0 to 1, with 1 being the best match. It considers five things: the energy, mood, genre, acousticness, and the valence. For energy, acousticness, and valence (how positive a song sounds), the closer a song is to what the user prefers, the more points it gets, and it loses points at a steady rate the further away it is. For example, if someone likes fairly energetic songs, a song with a similar energy level gets more points. Songs that are equally far above or below their preferred energy level get the same points. 
+For mood and genre, a song gets points if it matches the user’s choice and no points for that part if it doesn’t. Some parts matter more than others. Energy makes up 30% of the score, mood 25%, genre 20%, acousticness 15%, and valence 10%. I chose these percentages myself and gave energy the most weight because I think it’s one of the main parts of how a song feels. If a user's profile doesn't include a feature, the model ignores that feature and scales the remaining percentages up so the score is still in the range 0 to 1. The recommender adds up the points and shows the five songs with the highest scores. It also shows how much each matching part contributed, so the user can understand why each song was recommended. The starter code didn’t have a way to score or rank songs, so I added that myself.
 ---
 
 ## 4. Data  
