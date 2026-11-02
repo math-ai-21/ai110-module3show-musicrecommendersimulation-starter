@@ -62,6 +62,14 @@ def load_songs(csv_path: str) -> List[Dict]:
 NUMERIC_WEIGHTS = {"energy": 0.30, "acousticness": 0.15, "valence": 0.10}
 CATEGORY_WEIGHTS = {"mood": 0.25, "genre": 0.20}
 
+# Experiment (not used): double energy (0.30 -> 0.60) and halve genre (0.20 -> 0.10).
+# The weights add up to 1.20, which is fine because score_song divides by the
+# weights it used. The top song stayed the same for all 4 profiles, but High-Energy
+# Pop and Road Trip each moved a weaker fit above a stronger one, so I kept the
+# original weights above.
+# NUMERIC_WEIGHTS = {"energy": 0.60, "acousticness": 0.15, "valence": 0.10}
+# CATEGORY_WEIGHTS = {"mood": 0.25, "genre": 0.10}
+
 def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
     """Score one song from 0 to 1 against user preferences and return (score, reasons)."""
     weight_used = 0.0

@@ -97,22 +97,122 @@ You can add more tests in `tests/test_recommender.py`.
 Loading songs from data/songs.csv...
 Loaded songs: 18
 
-User profile: genre=pop, mood=happy, energy=0.8
+Road Trip
+User profile: genre=indie pop, mood=uplifting, energy=0.7, acousticness=0.3, valence=0.85
 Recommendations:
-  1. Sunrise City - Score: 0.99
-       - energy 0.82 vs target 0.80 (+0.39)
-       - mood match: happy (+0.33)
-       - genre match: pop (+0.27)
+  1. Island Drift - Score: 0.74
+       - energy 0.58 vs target 0.70 (+0.26)
+       - acousticness 0.45 vs target 0.30 (+0.13)
+       - valence 0.88 vs target 0.85 (+0.10)
+       - mood match: uplifting (+0.25)
   2. Rooftop Lights - Score: 0.72
-       - energy 0.76 vs target 0.80 (+0.38)
-       - mood match: happy (+0.33)
-  3. Gym Hero - Score: 0.61
-       - energy 0.93 vs target 0.80 (+0.35)
-       - genre match: pop (+0.27)
-  4. Concrete Crown - Score: 0.39
-       - energy 0.78 vs target 0.80 (+0.39)
-  5. Night Drive Loop - Score: 0.38
-       - energy 0.75 vs target 0.80 (+0.38)
+       - energy 0.76 vs target 0.70 (+0.28)
+       - acousticness 0.35 vs target 0.30 (+0.14)
+       - valence 0.81 vs target 0.85 (+0.10)
+       - genre match: indie pop (+0.20)
+  3. Sunrise City - Score: 0.49
+       - energy 0.82 vs target 0.70 (+0.26)
+       - acousticness 0.18 vs target 0.30 (+0.13)
+       - valence 0.84 vs target 0.85 (+0.10)
+  4. Night Drive Loop - Score: 0.49
+       - energy 0.75 vs target 0.70 (+0.28)
+       - acousticness 0.22 vs target 0.30 (+0.14)
+       - valence 0.49 vs target 0.85 (+0.06)
+  5. Concrete Crown - Score: 0.48
+       - energy 0.78 vs target 0.70 (+0.28)
+       - acousticness 0.12 vs target 0.30 (+0.12)
+       - valence 0.62 vs target 0.85 (+0.08)
+```
+
+```
+High-Energy Pop
+User profile: genre=pop, mood=happy, energy=0.9, acousticness=0.1, valence=0.8
+Recommendations:
+  1. Sunrise City - Score: 0.96
+       - energy 0.82 vs target 0.90 (+0.28)
+       - acousticness 0.18 vs target 0.10 (+0.14)
+       - valence 0.84 vs target 0.80 (+0.10)
+       - mood match: happy (+0.25)
+       - genre match: pop (+0.20)
+  2. Gym Hero - Score: 0.73
+       - energy 0.93 vs target 0.90 (+0.29)
+       - acousticness 0.05 vs target 0.10 (+0.14)
+       - valence 0.77 vs target 0.80 (+0.10)
+       - genre match: pop (+0.20)
+  3. Rooftop Lights - Score: 0.72
+       - energy 0.76 vs target 0.90 (+0.26)
+       - acousticness 0.35 vs target 0.10 (+0.11)
+       - valence 0.81 vs target 0.80 (+0.10)
+       - mood match: happy (+0.25)
+  4. Neon Overdrive - Score: 0.52
+       - energy 0.96 vs target 0.90 (+0.28)
+       - acousticness 0.03 vs target 0.10 (+0.14)
+       - valence 0.80 vs target 0.80 (+0.10)
+  5. Storm Runner - Score: 0.52
+       - energy 0.91 vs target 0.90 (+0.30)
+       - acousticness 0.10 vs target 0.10 (+0.15)
+       - valence 0.48 vs target 0.80 (+0.07)
+```
+
+```
+Chill Lofi
+User profile: genre=lofi, mood=chill, energy=0.35, acousticness=0.8, valence=0.58
+Recommendations:
+  1. Library Rain - Score: 0.99
+       - energy 0.35 vs target 0.35 (+0.30)
+       - acousticness 0.86 vs target 0.80 (+0.14)
+       - valence 0.60 vs target 0.58 (+0.10)
+       - mood match: chill (+0.25)
+       - genre match: lofi (+0.20)
+  2. Midnight Coding - Score: 0.96
+       - energy 0.42 vs target 0.35 (+0.28)
+       - acousticness 0.71 vs target 0.80 (+0.14)
+       - valence 0.56 vs target 0.58 (+0.10)
+       - mood match: chill (+0.25)
+       - genre match: lofi (+0.20)
+  3. Spacewalk Thoughts - Score: 0.75
+       - energy 0.28 vs target 0.35 (+0.28)
+       - acousticness 0.92 vs target 0.80 (+0.13)
+       - valence 0.65 vs target 0.58 (+0.09)
+       - mood match: chill (+0.25)
+  4. Focus Flow - Score: 0.73
+       - energy 0.40 vs target 0.35 (+0.28)
+       - acousticness 0.78 vs target 0.80 (+0.15)
+       - valence 0.59 vs target 0.58 (+0.10)
+       - genre match: lofi (+0.20)
+  5. Coffee Shop Stories - Score: 0.52
+       - energy 0.37 vs target 0.35 (+0.29)
+       - acousticness 0.89 vs target 0.80 (+0.14)
+       - valence 0.71 vs target 0.58 (+0.09)
+```
+
+```
+Deep Intense Rock
+User profile: genre=rock, mood=intense, energy=0.92, acousticness=0.08, valence=0.45
+Recommendations:
+  1. Storm Runner - Score: 0.99
+       - energy 0.91 vs target 0.92 (+0.30)
+       - acousticness 0.10 vs target 0.08 (+0.15)
+       - valence 0.48 vs target 0.45 (+0.10)
+       - mood match: intense (+0.25)
+       - genre match: rock (+0.20)
+  2. Gym Hero - Score: 0.76
+       - energy 0.93 vs target 0.92 (+0.30)
+       - acousticness 0.05 vs target 0.08 (+0.15)
+       - valence 0.77 vs target 0.45 (+0.07)
+       - mood match: intense (+0.25)
+  3. Iron Requiem - Score: 0.51
+       - energy 0.97 vs target 0.92 (+0.29)
+       - acousticness 0.06 vs target 0.08 (+0.15)
+       - valence 0.25 vs target 0.45 (+0.08)
+  4. Neon Overdrive - Score: 0.50
+       - energy 0.96 vs target 0.92 (+0.29)
+       - acousticness 0.03 vs target 0.08 (+0.14)
+       - valence 0.80 vs target 0.45 (+0.06)
+  5. Concrete Crown - Score: 0.48
+       - energy 0.78 vs target 0.92 (+0.26)
+       - acousticness 0.12 vs target 0.08 (+0.14)
+       - valence 0.62 vs target 0.45 (+0.08)
 ```
 
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->
@@ -121,25 +221,13 @@ Recommendations:
 
 ## Experiments You Tried
 
-Use this section to document the experiments you ran. For example:
-
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
+Weight shift: Energy's weight was doubled (0.30 to 0.60) and genre's weight was halved (0.20 to 0.10). The top song stayed the same for all four profiles, but the middle of the list changed for two of them. For High-Energy Pop, Rooftop Lights moved above Gym Hero, and for Road Trip, Night Drive Loop moved above Sunrise City by a small margin (0.64 vs. 0.63). Weaker matches also scored higher, for example Coffee Shop Stories went from 0.52 to 0.68. The results were different but not better, so the original weights were kept. The experiment is saved as commented-out lines in `src/recommender.py`.
 
 ---
 
 ## Limitations and Risks
 
-Summarize some limitations of your recommender.
-
-Examples:
-
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
-
-You will go deeper on this in your model card.
+The catalog has only 18 songs, and most genres appear just once. Since a song only gets genre credit when the genre matches exactly, if a listener's favorite genre has more songs, like lofi, then they get better recommendations than listeners of a less common genre like jazz. See the model_card.md for more details.
 
 ---
 
