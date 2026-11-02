@@ -1,21 +1,13 @@
 # 🎧 Model Card: Music Recommender Simulation
 
 ## 1. Model Name  
-
-Give your model a short, descriptive name.  
-Example: **VibeFinder 1.0**  
+**TuneMatcher 1.0**  
 
 ---
 
 ## 2. Intended Use  
 
-Describe what your recommender is designed to do and who it is for. 
-
-Prompts:  
-
-- What kind of recommendations does it generate  
-- What assumptions does it make about the user  
-- Is this for real users or classroom exploration  
+This recommender suggests up to five songs from a small catalog that best fit a listener's taste profile. The profile gives a favorite genre and mood, plus target levels for energy, acousticness and valence, and the system ranks the songs by how closely they match, with a short list of reasons for each one. It assumes that the listener knows what they want and can describe it in those terms, and that the genre and mood labels in the catalog mean the same thing to them as they do to the system. It is more of a classroom exploration of how recommenders turn data into suggestions, not a complete system for real listeners, since the catalog has only 18 songs and the scoring has not been tested with actual listeners. With a bigger catalog, profiles that listeners can create themselves, and a user interface, it could become a full recommender.
 
 ---
 
@@ -26,28 +18,13 @@ Prompts:
 ---
 
 ## 4. Data  
-
-Describe the dataset the model uses.  
-
-Prompts:  
-
-- How many songs are in the catalog  
-- What genres or moods are represented  
-- Did you add or remove data  
-- Are there parts of musical taste missing in the dataset  
+The catalog has 18 songs in data/songs.csv. Each song has a title, artist, genre, mood and five numbers (energy, tempo, valence, danceability and acousticness). The songs cover 15 genres and 14 moods, but most appear only once. Only lofi (3 songs) and pop (2 songs) have more than one, and only chill, happy and intense appear for more than one song. The starter file had 10 songs, and 8 more were added to bring in genres and moods that were missing, such as hip hop, classical, country, r&b, EDM, reggae, metal and folk. None of the songs were removed. Many parts of musical taste are still missing: there are no lyrics, languages, release years or popularity, and the energy values skip the range 0.58 to 0.75, so listeners who want medium-high energy have few options.
 
 ---
 
 ## 5. Strengths  
 
-Where does your system seem to work well  
-
-Prompts:  
-
-- User types for which it gives reasonable results  
-- Any patterns you think your scoring captures correctly  
-- Cases where the recommendations matched your intuition  
-
+The system works best for listeners with one consistent taste, especially in a genre with several songs in the catalog. For the Chill Lofi profile, Library Rain (0.99) and Midnight Coding (0.96) were strong matches. The scoring also separates listeners well: Chill Lofi shares no songs with the other profiles, and High-Energy Pop and Deep Intense Rock both want energy around 0.9 but get different top songs (Sunrise City vs. Storm Runner) because of their genre, mood and valence. The results matched what is expected: Deep Intense Rock gets loud, dark songs like Storm Runner and Iron Requiem, and Chill Lofi gets quiet, acoustic ones like Library Rain. Also, every recommendation lists the reasons behind its score, so it is easy to see why a song was chosen.
 ---
 
 ## 6. Limitations and Bias
@@ -79,23 +56,9 @@ The changes made the recommendations different, but they did not seem better, so
 
 ## 8. Future Work  
 
-Ideas for how you would improve the model next.  
-
-Prompts:  
-
-- Additional features or preferences  
-- Better ways to explain recommendations  
-- Improving diversity among the top results  
-- Handling more complex user tastes  
+Future versions could let listeners create their own profiles and use sliders to choose their preferred energy, acousticness, and valence. Features like tempo and danceability could also help with recommendations, along with lyrics and artists. Another improvement would be to give some credit to related moods or genres, such as “chill” and “relaxed,” instead of requiring an exact match. Scores could also drop differently as a song gets further from the listener’s preferences, rather than always decreasing at a steady rate. Clearer explanations would make the recommendations easier to understand, and avoiding songs that are too similar would give the top five more variety. Adding more songs to each genre would give listeners more choices, especially those whose favorite genres currently have very few songs.
 
 ---
 
 ## 9. Personal Reflection  
-
-A few sentences about your experience.  
-
-Prompts:  
-
-- What you learned about recommender systems  
-- Something unexpected or interesting you discovered  
-- How this changed the way you think about music recommendation apps  
+Through this project, I learned how a recommender system can compare songs with a listener’s preferences and use scores to decide which songs to suggest. Something I found interesting was how well some songs matched the profiles, even with such a small catalog. It also made me think more about the recommendations I see on YouTube or Spotify. I usually listen without thinking much about why a particular song was suggested, but building this system helped me understand how song features and listening preferences can help create recommendations.

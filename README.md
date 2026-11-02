@@ -1,23 +1,13 @@
 # 🎵 Music Recommender Simulation
 
 ## Project Summary
-
-In this project you will build and explain a small music recommender system.
-
-Your goal is to:
-
-- Represent songs and a user "taste profile" as data
-- Design a scoring rule that turns that data into recommendations
-- Evaluate what your system gets right and wrong
-- Reflect on how this mirrors real world AI recommenders
-
-Replace this paragraph with your own summary of what your version does.
+This is a small music recommender system that compares a listener's music taste profile (including favorite genre and mood, plus target energy, acousticness and valence) to 18 songs and gives each song a score from 0 to 1. Energy, acousticness and valence score higher the closer a song is to the target, and mood and genre score only when they match exactly, with energy weighted most heavily. The system returns the top five songs, each with reasons that show how much every feature added to its score. I tested it with four different profiles and ran one weight experiment, and I found that it works best for listeners whose favorite genre has several songs in the catalog.
 
 ---
 
 ## How The System Works
 - Real-world recommenders like Spotify or YouTube mostly use two approaches. Collaborative filtering looks at what similar users listened to, skipped, or saved. Content-based filtering compares the specific attributes (such as genre, artist, etc) of the songs themselves to what a user already likes. The version I am building is content-based only, as it has no other
-users and can't learn from anyone else's behavior. It first prioritizes matching a song's energy first, then mood, then genre, because I believe those best show how people feel about the song. The tradeoff here is that such a system will mostly recommend songs that look like what the user already asked for, so it won't give them new types of songs in a way a real system may have.
+users and can't learn from anyone else's behavior. It prioritizes matching a song's energy first, then mood, then genre, because I believe those best show how people feel about the song. The tradeoff here is that such a system will mostly recommend songs that look like what the user already asked for, so it won't give them new types of songs in a way a real system may have.
 
 - What features does each `Song` use in your system
   - Each song in my system uses energy, mood, genre, acousticness and valence. The variables id, title, and artist are just identifiers, not characteristics of a song. I left out tempo_bpm and danceability as they mostly repeat what energy already shows. 
@@ -45,7 +35,7 @@ users and can't learn from anyone else's behavior. It first prioritizes matching
 
 Algorithm Recipe:
 1. The system takes in the user's taste profile, including favorite genre, favorite mood, target energy, target acousticness, target valence.
-2. Each song is compared against the user's prefernces. For each feature a match score is calculated: `1 - |song - target|` for energy, acousticness and valence, and 1 or 0 for mood and genre.
+2. Each song is compared against the user's preferences. For each feature a match score is calculated: `1 - |song - target|` for energy, acousticness and valence, and 1 or 0 for mood and genre.
 3. Each match score is multiplied by its assigned weight (listed above) and they are all added up to get the song's score.
 4. The songs are sorted from highest to lowest score and the top 5 recommendations are returned.
 
@@ -237,10 +227,4 @@ Read and complete `model_card.md`:
 
 [**Model Card**](model_card.md)
 
-Write 1 to 2 paragraphs here about what you learned:
-
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
-
-
-
+Building this recommender made me see how songs can be matched to a listener’s preferences using numbers and labels, even though the system does not actually understand the music. When I tried changing the weights, the top song stayed the same for all four profiles, but some of the other recommendations changed places. I also noticed how the small catalog affected the results, since it has only 18 songs and most genres appear just once. A lofi listener had several good matches to choose from, while a jazz listener got one strong match followed by weaker ones, which showed how the available songs could favor some listeners’ tastes over others.
