@@ -6,10 +6,10 @@ This file helps you quickly run and test your recommender.
 You will implement the functions in recommender.py:
 - load_songs
 - score_song
-- recommend_songs
+- recommend
 """
 
-from src.recommender import load_songs, recommend_songs
+from src.recommender import Recommender
 
 
 PROFILES = {
@@ -29,14 +29,21 @@ PROFILES = {
         "genre": "rock", "mood": "intense",
         "energy": 0.92, "acousticness": 0.08, "valence": 0.45,
     },
+    # Uses the challenge attributes: popularity, decade, language, vocal type, mood tags.
+    "Nostalgic Dreamer": {
+        "energy": 0.45, "acousticness": 0.75,
+        "popularity": 50, "release_decade": 1990,
+        "language": "english", "vocal_type": "vocals",
+        "mood_tags": ["nostalgic", "reflective", "melancholic"],
+    },
 }
 
 
 def main() -> None:
-    songs = load_songs("data/songs.csv")
+    songs = Recommender.load_songs("data/songs.csv")
 
     for name, user_prefs in PROFILES.items():
-        recommendations = recommend_songs(user_prefs, songs, k=5)
+        recommendations = Recommender.recommend(user_prefs, songs, k=5)
 
         profile = ", ".join(f"{key}={value}" for key, value in user_prefs.items())
         print(f"\n{name}")

@@ -1,5 +1,7 @@
 # 🎧 Model Card: Music Recommender Simulation
 
+> **Note:** This model card does not account for the challenge changes (new song attributes: popularity, release decade, language, vocal type and multi-value mood tags, plus their optional scoring in `src/recommender.py`). The features, weights, data description, evaluation and bias sections below describe the earlier version.
+
 ## 1. Model Name  
 **TuneMatcher 1.0**  
 

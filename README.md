@@ -1,7 +1,10 @@
 # 🎵 Music Recommender Simulation
 
+> **Note:** This README and `model_card.md` do not account for the challenge changes (new song attributes: popularity, release decade, language, vocal type, mood tags, and their scoring in `src/recommender.py`).
+> Everything below describes the project as it was before that extension.
+
 ## Project Summary
-This is a small music recommender system that compares a listener's music taste profile (including favorite genre and mood, plus target energy, acousticness and valence) to 18 songs and gives each song a score from 0 to 1. Energy, acousticness and valence score higher the closer a song is to the target, and mood and genre score only when they match exactly, with energy weighted most heavily. The system returns the top five songs, each with reasons that show how much every feature added to its score. I tested it with four different profiles and ran one weight experiment, and I found that it works best for listeners whose favorite genre has several songs in the catalog.
+This is a small music recommender system that compares a listener's music taste profile (favorite genre and mood, target energy, and whether they like acoustic songs, plus an optional target valence) to 18 songs and gives each song a score from 0 to 1. Energy, acousticness and valence score higher the closer a song is to the target, and mood and genre score only when they match exactly, with energy weighted most heavily. The system returns the top five songs, each with reasons that show how much every feature added to its score. I tested it with four different profiles and ran one weight experiment, and I found that it works best for listeners whose favorite genre has several songs in the catalog.
 
 ---
 
@@ -12,10 +15,10 @@ users and can't learn from anyone else's behavior. It prioritizes matching a son
 - What features does each `Song` use in your system
   - Each song in my system uses energy, mood, genre, acousticness and valence. The variables id, title, and artist are just identifiers, not characteristics of a song. I left out tempo_bpm and danceability as they mostly repeat what energy already shows. 
 - What information does your `UserProfile` store
-  - UserProfile stores the user's favorite genre, favorite mood, target energy, target acousticness and target valence.
+  - UserProfile stores the user's favorite genre, favorite mood, target energy and whether they like acoustic songs, which is turned into a target acousticness of 0.8 (likes acoustic) or 0.2 (does not). Target valence is not stored in UserProfile, but the scorer uses it when a preferences dict includes it, as the sample profiles below do.
 
 - How does your `Recommender` compute a score for each song
-  - My recommender gives each song a score from 0 to 1 based on how well the song fits the user's profile. For every feature, it compares the song's value to the user's preference and works out a match score (1 = perfect match, 0 = no match). It multiplies each match score by that feature's weight and adds the results.
+  - My `Recommender` class gives each song a score from 0 to 1 based on how well the song fits the user's profile. For every feature, it compares the song's value to the user's preference and works out a match score (1 = perfect match, 0 = no match). It multiplies each match score by that feature's weight, adds the results, and divides by the total weight of the features used, so the score always runs from 0 to 1.
 
 - How each match score is calculated:
   - Energy, acousticness, and valence use a linear closeness score: `1 - |song - target|`. The target is the value stored in the user's profile, so the closer a song's value is to what the user wants, the higher it scores. For example, if the user's target energy is 0.80, a song with energy 0.82 scores 0.98 and a song with energy 0.42 scores 0.62.
@@ -34,9 +37,9 @@ users and can't learn from anyone else's behavior. It prioritizes matching a son
   - The ranking rule scores every song in the catalog, sorts them from highest to lowest score, and returns the top 5.
 
 Algorithm Recipe:
-1. The system takes in the user's taste profile, including favorite genre, favorite mood, target energy, target acousticness, target valence.
+1. The system takes in the user's taste profile, including favorite genre, favorite mood, target energy, target acousticness and (optionally) target valence.
 2. Each song is compared against the user's preferences. For each feature a match score is calculated: `1 - |song - target|` for energy, acousticness and valence, and 1 or 0 for mood and genre.
-3. Each match score is multiplied by its assigned weight (listed above) and they are all added up to get the song's score.
+3. Each match score is multiplied by its assigned weight (listed above) and they are all added up and divided by the total weight of the features used to get the song's score.
 4. The songs are sorted from highest to lowest score and the top 5 recommendations are returned.
 
 Expected biases:
